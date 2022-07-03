@@ -53,6 +53,11 @@ console.log(computerSelection);
 
 // THIS PORTION CHECKS THE ANSWER AGAINST THE COMPUTER'S, CONFIRMS VALIDITY OF ANSWER, AND ADDS TO SCORE AND GAME COUNT.
 
+const roundDraw = "It's a draw! Let's play again!";
+const roundLoss = `You lose! ${computerSelection} beats ${playerSelection}`;
+const roundWin = `You win! ${playerSelection} beats ${computerSelection}!`;
+const roundNull = `You lose! ${computerSelection} beats ${playerSelection}.You have to type Rock, Paper or Scissors you spineless slug!! We won't count your insolence. Play again.`;
+
 function playRound(A, B){
 
     console.log("You chose " + B);
@@ -61,34 +66,34 @@ function playRound(A, B){
 
     if (A === B){
         draws += 1;
-        console.log("It's a draw! Let's play again!");
+    return roundDraw;
     } 
     
     else if ((B == "Rock" && A == "Scissors")||
     (B == "Scissors" && A == "Paper")||
     (B == "Paper" && A == "Rock")){
         wins += 1;
-        console.log(`You win! ${B} beats ${A}!`);
+        return roundWin;
     }
 
     else if((A == "Rock" && B == "Scissors")||
     (A == "Scissors" && B == "Paper")||
     (A == "Paper" && B == "Rock")){
         losses += 1;
-        console.log(`You lose! ${A} beats ${B}`);
+    return roundLoss;
     }
 
     else {
-        console.log(`You lose! ${A} beats ${B}. You have to type Rock, Paper or Scissors you spineless slug!! We won't count your insolence. Play again.`);
+    return roundNull;
     }
 
 
 }
 
-playRound(computerSelection, playerSelection);
+
+console.log(playRound(computerSelection, playerSelection));
 
     count += parseInt(wins + losses + draws);
 
-    console.log("Wins: " + wins + " Losses: " + losses + " Draws: " + draws + " Games Played: " + count)
-
+console.log("Wins: " + wins + " Losses: " + losses + " Draws: " + draws + " Games Played: " + count)
 
