@@ -15,19 +15,28 @@ let draws = 0
 
 //THIS FIRST PORTION OF CODE SELECTS THE CUMPUTER RESPONSE RANDOMLY FROM AN ARRAY
 
-for (i = 0; i < 5;){
+function computerPlay()
+
+{
     
     const ansArray = ["Rock", "Paper", "Scissors"]
-    const compSelection = Math.floor(Math.random() * ansArray.length);
+    const computerRandomAnswer = Math.floor(Math.random() * ansArray.length);
     //console.log(ansArray[compSelection]);
-    const compAns = ansArray[compSelection];
+    const computerResponse = ansArray[computerRandomAnswer];
     //console.log(compAns);
+
+    return computerResponse;
     
+}
+
+let computerSelection = computerPlay()
+
+console.log(computerSelection);
 
 // THIS PORTION TAKES IN THE USER INPUT AND AND FORMATS IT TO START WITH A CAPITAL AND FORMAT THE REST TO LOWER CASE
 
     let userInput = prompt("Please type Rock, Paper or Scissors","");
-    let userAns;
+    let playerSelection;
 
 
    function textFormat(){
@@ -40,44 +49,46 @@ for (i = 0; i < 5;){
         return (cap + rest);
     }
 
-    userAns = textFormat(userInput);
+    playerSelection = textFormat(userInput);
 
 // THIS PORTION CHECKS THE ANSWER AGAINST THE COMPUTER'S, CONFIRMS VALIDITY OF ANSWER, AND ADDS TO SCORE AND GAME COUNT.
 
-    console.log("You chose " + userAns);
-    console.log("The computer chose " + compAns);
+function playRound(A, B){
+
+    console.log("You chose " + B);
+    console.log("The computer chose " + A);
 
 
-    if (compAns === userAns)
-    {
+    if (A === B){
         draws += 1;
-        i++;
-        console.log("It's a draw! Let's play again!")
+        console.log("It's a draw! Let's play again!");
     } 
     
-    else if ((userAns == "Rock" && compAns == "Scissors")||
-    (userAns == "Scissors" && compAns == "Paper")||
-    (userAns == "Paper" && compAns == "Rock"))
-    {
+    else if ((B == "Rock" && A == "Scissors")||
+    (B == "Scissors" && A == "Paper")||
+    (B == "Paper" && A == "Rock")){
         wins += 1;
-        i++;
-        console.log("You win!");
+        console.log(`You win! ${B} beats ${A}!`);
     }
 
-    else if ((compAns == "Rock" && userAns == "Scissors")||
-    (compAns == "Scissors" && userAns == "Paper")||
-    (compAns == "Paper" && userAns == "Rock"))
-    {
+    else if((A == "Rock" && B == "Scissors")||
+    (A == "Scissors" && B == "Paper")||
+    (A == "Paper" && B == "Rock")){
         losses += 1;
-        i++
-        console.log("You lose!");
+        console.log(`You lose! ${A} beats ${B}`);
     }
 
-    else {console.log("Please type rock, paper or scissors.")};
+    else {
+        console.log(`You lose! ${A} beats ${B}. You have to type Rock, Paper or Scissors you spineless slug!! We won't count your insolence. Play again.`);
+    }
 
-    let count = parseInt(wins + losses + draws);
+
+}
+
+playRound(computerSelection, playerSelection);
+
+    count += parseInt(wins + losses + draws);
 
     console.log("Wins: " + wins + " Losses: " + losses + " Draws: " + draws + " Games Played: " + count)
 
 
-}
