@@ -51,12 +51,14 @@ console.log(computerSelection);
 
     playerSelection = textFormat(userInput);
 
-// THIS PORTION CHECKS THE ANSWER AGAINST THE COMPUTER'S, CONFIRMS VALIDITY OF ANSWER, AND ADDS TO SCORE AND GAME COUNT.
+// THESE DECLARATIONS ARE THE POSSIBLE OUTPUTS OF THE GAME FUNCTION
 
 const roundDraw = "It's a draw! Let's play again!";
 const roundLoss = `You lose! ${computerSelection} beats ${playerSelection}`;
 const roundWin = `You win! ${playerSelection} beats ${computerSelection}!`;
 const roundNull = `You lose! ${computerSelection} beats ${playerSelection}.You have to type Rock, Paper or Scissors you spineless slug!! We won't count your insolence. Play again.`;
+
+// THIS PORTION CHECKS THE ANSWER AGAINST THE COMPUTER'S, LOG'S THE RESULT, CONFIRMS VALIDITY OF ANSWER, AND ADDS TO SCORE AND GAME COUNT.
 
 function playRound(A, B){
 
@@ -90,8 +92,13 @@ function playRound(A, B){
 
 }
 
+function game(){
+    for (i = 1; i < 5; i++);
+    playRound(computerSelection, playerSelection)
 
-console.log(playRound(computerSelection, playerSelection));
+}
+
+game();
 
     count += parseInt(wins + losses + draws);
 
