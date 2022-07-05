@@ -3,9 +3,14 @@
 // PSEUDOCODE
 
 /* Declare variables to represent computer answer, user answer, game count, win/loss/draw count.
-A for loop such that the game restarts with parameters reset each iterataion with w/l/d and count outside of game updated */
+Create a function that randomly selects the computers answer from an array.
+Another function that prompts for the users choice and that formats it properly to match the computer answer.
+Create a game function that plays a round. 
+Create 'for' loop such that the game restarts with parameters reset each iterataion with w/l/d and 
+count outside of game updates and plays 5 games.
+Lastly an end game alert. */
 
-//THIS PORTION DECLARES THE GLOBAL SCORE COUNT
+// THIS PORTION DECLARES THE GLOBAL SCORE COUNT AND NEEDED VARIABLES.
 
 let count = 0
 let wins = 0
@@ -22,7 +27,7 @@ let roundWin;
 
 let userInput;
 
-//THIS FUNCTION RETURNS THE CUMPUTER SELECTION RANDOMLY FROM AN ARRAY
+// THIS FUNCTION RETURNS THE CUMPUTER SELECTION RANDOMLY FROM AN ARRAY.
 
 function computerPlay()
 
@@ -39,7 +44,7 @@ function computerPlay()
 
 
 
-// THIS FUNCTION TAKES IN THE USER INPUT AND AND FORMATS IT TO START WITH A CAPITAL AND FORMAT THE REST TO LOWER CASE AND RETURNS THE PLAYER SELECTION   
+// THIS FUNCTION TAKES IN THE USER INPUT AND AND FORMATS IT TO START WITH A CAPITAL AND FORMAT THE REST TO LOWER CASE AND RETURNS THE PLAYER SELECTION. 
 
 function userPlay()
 
@@ -97,6 +102,8 @@ function playRound(A, B){
 }
 
 
+// THIS FUNCTION TAKES THE INPUTS FROM THE PRIVIOUS FUCNTIONS AND PLAYS 5 GAMES, NOT COUNTING GAMES WITH INVALID INPUTS.
+
 function game()
 
 {
@@ -104,7 +111,7 @@ function game()
     for (count = 0; count < 5; ){
 
     computerPlay();
-    console.log(computerSelection);
+    //console.log(computerSelection);
     userInput = prompt("Please type Rock, Paper or Scissors","");
     userPlay();
 
@@ -121,11 +128,13 @@ function game()
 }}
 
 
+// THIS LAST FUNCTION ENDS THE GAME WITH AN ALERT WITH A W/L/D SCORE AND MESSAGE.
+
 function gameOver()
 
 {
     if (wins > losses){
-        return "You win!!";
+        return "You win, SPANK ME DADDY!!";
     } else if (wins < losses){
         return "You lose, idiot!!";
     } else {
@@ -135,7 +144,7 @@ function gameOver()
 
 game();
 
-alert(`That was fun! ${gameOver()}`);
+alert(`That was fun! Your score is ${wins}-${losses}-${draws}. ${gameOver()}`);
 
 
 
