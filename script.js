@@ -12,8 +12,17 @@ let wins = 0
 let losses = 0
 let draws = 0
 
+let computerSelection;
+let playerSelection;
 
-//THIS FIRST PORTION OF CODE SELECTS THE CUMPUTER RESPONSE RANDOMLY FROM AN ARRAY
+let roundDraw;
+let roundLoss;
+let roundNull;
+let roundWin;
+
+let userInput;
+
+//THIS FUNCTION RETURNS THE CUMPUTER SELECTION RANDOMLY FROM AN ARRAY
 
 function computerPlay()
 
@@ -21,22 +30,20 @@ function computerPlay()
     
     const ansArray = ["Rock", "Paper", "Scissors"]
     const computerRandomAnswer = Math.floor(Math.random() * ansArray.length);
-    //console.log(ansArray[compSelection]);
-    const computerResponse = ansArray[computerRandomAnswer];
-    //console.log(compAns);
+    //console.log(ansArray[computerRandomAnswer]);
+    computerSelection = ansArray[computerRandomAnswer];
 
-    return computerResponse;
+    return computerSelection;
     
 }
 
-let computerSelection = computerPlay()
 
-console.log(computerSelection);
 
-// THIS PORTION TAKES IN THE USER INPUT AND AND FORMATS IT TO START WITH A CAPITAL AND FORMAT THE REST TO LOWER CASE
+// THIS FUNCTION TAKES IN THE USER INPUT AND AND FORMATS IT TO START WITH A CAPITAL AND FORMAT THE REST TO LOWER CASE AND RETURNS THE PLAYER SELECTION   
 
-    let userInput = prompt("Please type Rock, Paper or Scissors","");
-    let playerSelection;
+function userPlay()
+
+{
 
 
    function textFormat(){
@@ -51,12 +58,10 @@ console.log(computerSelection);
 
     playerSelection = textFormat(userInput);
 
-// THESE DECLARATIONS ARE THE POSSIBLE OUTPUTS OF THE GAME FUNCTION
+    return playerSelection;
+}
 
-const roundDraw = "It's a draw! Let's play again!";
-const roundLoss = `You lose! ${computerSelection} beats ${playerSelection}`;
-const roundWin = `You win! ${playerSelection} beats ${computerSelection}!`;
-const roundNull = `You lose! ${computerSelection} beats ${playerSelection}.You have to type Rock, Paper or Scissors you spineless slug!! We won't count your insolence. Play again.`;
+
 
 // THIS PORTION CHECKS THE ANSWER AGAINST THE COMPUTER'S, LOG'S THE RESULT, CONFIRMS VALIDITY OF ANSWER, AND ADDS TO SCORE AND GAME COUNT.
 
@@ -89,18 +94,48 @@ function playRound(A, B){
     return roundNull;
     }
 
-
 }
 
-function game(){
-    for (i = 1; i < 5; i++);
-    playRound(computerSelection, playerSelection)
 
+function game()
+
+{
+   
+    for (count = 0; count < 5; ){
+
+    computerPlay();
+    console.log(computerSelection);
+    userInput = prompt("Please type Rock, Paper or Scissors","");
+    userPlay();
+
+    roundDraw = "It's a draw! Let's play again!";
+    roundLoss = `You lose! ${computerSelection} beats ${playerSelection}`;
+    roundWin = `You win! ${playerSelection} beats ${computerSelection}!`;
+    roundNull = `You lose! ${computerSelection} beats ${playerSelection}.You have to type Rock, Paper or Scissors you spineless slug!! We won't count your insolence. Play again.`;
+    
+    console.log(playRound(computerSelection, playerSelection));
+ 
+    count = parseInt(wins + losses + draws);   
+
+    console.log("Wins: " + wins + " Losses: " + losses + " Draws: " + draws + " Games Played: " + count);
+}}
+
+
+function gameOver()
+
+{
+    if (wins > losses){
+        return "You win!!";
+    } else if (wins < losses){
+        return "You lose, idiot!!";
+    } else {
+        return "It's a stalemate!";
+    }
 }
 
 game();
 
-    count += parseInt(wins + losses + draws);
+alert(`That was fun! ${gameOver()}`);
 
-console.log("Wins: " + wins + " Losses: " + losses + " Draws: " + draws + " Games Played: " + count)
+
 
