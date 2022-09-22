@@ -1,0 +1,25 @@
+body {
+    font-family: 'Times New Roman', Times, serif;
+    font-size: 18px;
+    
+}
+
+#header {
+    display: flex;
+    background-color: #003a70;
+    color:  #ffcb05;
+    justify-content: center;
+    
+    
+}
+
+.pokeball {
+    background-color: #003a70;
+}
+
+#header ul {
+    list-style: none;
+    display: flex;
+    flex 1;
+    background-color: blue;
+}

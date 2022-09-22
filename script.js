@@ -142,9 +142,9 @@ function gameOver()
     }
 }
 
-game();
+//game();
 
-alert(`That was fun! Your score is ${wins}-${losses}-${draws}. ${gameOver()}`);
+//alert(`That was fun! Your score is ${wins}-${losses}-${draws}. ${gameOver()}`);
 
 
 
