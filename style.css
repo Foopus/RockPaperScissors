@@ -15,7 +15,6 @@ body {
     color:  #ffcb05;
     margin-top: 0px;
     margin-bottom: 0px;
-    flex: 1;
     
 }
 
@@ -28,17 +27,17 @@ body {
     padding: 20px;
     margin: 0px;
     text-align: center;
-    align-items: flex-start;
+    align-items: center;
     
 }
 
 img.ball\, {
-    width: 250px;
+    width: 20vw;
     background-color: transparent;
 }
 
 img.pokemon {
-    width: 300px;
+    width: 28vw;
 }
 
 
@@ -54,10 +53,21 @@ img.pokemon {
     justify-content: center;
     align-items: center;
     list-style: none;
-    gap: 40px;
     padding: 0px;
 }
 
 .liTitle {
     flex: 1 1 100%;
+}
+
+@font-face {
+    font-family: pokefont;
+    src: url(font/Pokemon\ Hollow.ttf);
+}
+  
+h2 {
+    font-family: pokeFont;
+    color: #ffcb05;
+    font-size: 3vw;
+    
 }
