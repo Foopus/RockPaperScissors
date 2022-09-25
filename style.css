@@ -8,7 +8,20 @@ body {
     
 }
 
+/* Below is the font.ttf insertion and header text */
 
+@font-face {
+    font-family: pokefont;
+    src: url(font/Pokemon\ Hollow.ttf);
+}
+  
+h2 {
+    font-family: pokeFont;
+    color: #ffcb05;
+    font-size: 3vw;   
+}
+
+/* Header CSS */
 
 #header {
     background-color: #003a70;
@@ -33,7 +46,6 @@ body {
 
 img.ball\, {
     width: 20vw;
-    background-color: transparent;
 }
 
 img.pokemon {
@@ -42,7 +54,7 @@ img.pokemon {
 
 
 .headerUl > * {
-    flex: 1 1 auto;
+    /* flex: 1 1 auto; */
     padding: 0px;
     margin: 0px;
 }
@@ -60,14 +72,31 @@ img.pokemon {
     flex: 1 1 100%;
 }
 
-@font-face {
-    font-family: pokefont;
-    src: url(font/Pokemon\ Hollow.ttf);
-}
-  
-h2 {
-    font-family: pokeFont;
-    color: #ffcb05;
-    font-size: 3vw;
+/* Game area and background CSS */
+
+/* #mainArea { */
     
+.mainUl {
+    display: flex;
+    padding: 0px;
+    margin: 0px;
+    
+}
+
+.gameArea {
+
+    flex: 1 1 100%;
+    border-color: #003a70;
+    border-width: 10px;
+    border-style: ridge;
+    height: 50vw;
+
+}
+
+img.trainers\, {
+    width: 20vw;
+    height: 50vw;
+    border-color: #ffcb05;
+    border-width: 10px;
+    border-style: ridge;
 }
