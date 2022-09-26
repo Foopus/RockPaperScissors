@@ -80,23 +80,35 @@ img.pokemon {
     display: flex;
     padding: 0px;
     margin: 0px;
+    align-items: stretch;
     
 }
 
 .gameArea {
 
     flex: 1 1 100%;
-    border-color: #003a70;
-    border-width: 10px;
+    border-color:#3d7dca;
+    border-width: 8px;
     border-style: ridge;
-    height: 50vw;
+    background-image: url(images/backgroundImg.jpg);
+    background-position: center;
+    background-size: cover;
+    
+    
 
 }
 
 img.trainers\, {
     width: 20vw;
-    height: 50vw;
+    /* height: 100%; */
     border-color: #ffcb05;
     border-width: 10px;
     border-style: ridge;
+    display: flex;
+    align-items: stretch;
+}
+
+.side {
+    display: flex;
+    align-items: stretch;
 }
