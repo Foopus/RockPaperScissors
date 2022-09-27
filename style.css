@@ -5,6 +5,8 @@ body {
     font-size: 18px;
     margin: 0px;
     margin-top: 0px;
+    justify-content: stretch;
+    align-items: stretch;
     
 }
 
@@ -18,7 +20,7 @@ body {
 h2 {
     font-family: pokeFont;
     color: #ffcb05;
-    font-size: 3vw;   
+    font-size: 4vh;   
 }
 
 /* Header CSS */
@@ -28,6 +30,10 @@ h2 {
     color:  #ffcb05;
     margin-top: 0px;
     margin-bottom: 0px;
+    display: flex;
+    justify-content: stretch;
+    max-height: 33vh;
+
     
 }
 
@@ -41,20 +47,20 @@ h2 {
     margin: 0px;
     text-align: center;
     align-items: center;
+    flex: 1 1 100%;
     
 }
 
 img.ball\, {
-    width: 20vw;
+    max-height: 26vh;
 }
 
 img.pokemon {
-    width: 28vw;
+    max-height: 15vh;
 }
 
 
 .headerUl > * {
-    /* flex: 1 1 auto; */
     padding: 0px;
     margin: 0px;
 }
@@ -70,17 +76,21 @@ img.pokemon {
 
 .liTitle {
     flex: 1 1 100%;
+    max-height: 27vh;
 }
 
 /* Game area and background CSS */
 
-/* #mainArea { */
+#mainArea {
+    flex: 3 1 100%;
+}
     
 .mainUl {
     display: flex;
     padding: 0px;
     margin: 0px;
     align-items: stretch;
+    list-style: none;
     
 }
 
@@ -95,12 +105,11 @@ img.pokemon {
     background-size: cover;
     
     
-
 }
 
 img.trainers\, {
     width: 20vw;
-    /* height: 100%; */
+    height: 65vh;
     border-color: #ffcb05;
     border-width: 10px;
     border-style: ridge;
@@ -111,4 +120,60 @@ img.trainers\, {
 .side {
     display: flex;
     align-items: stretch;
+}
+
+/* Game play area */
+
+.gameAreaFlx {
+    display: flex;
+    flex-direction: column;
+    margin: 0px;
+    padding: 0px;
+    list-style: none;
+}
+
+.gameScore {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    background-color: #262727;
+    height: 15vh;
+    font-family: pokeFont;
+    color: #ffcb05;
+    font-size: 3vh;
+    font-weight: bold;
+}
+
+.gameDisplay > *{
+    flex-basis: 100%;
+    height: 33vh;
+
+}
+
+.gameSelection {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    
+}
+
+img.selection {
+    height: 15vh;
+}
+
+/* Game display CSS */
+
+.gameDisplay {
+    display: flex;
+    background-color: aliceblue;
+    opacity: 0.5;
+    margin: 3vh 2vw;
+    max-height: 28vh;
+}
+
+.window {
+    background-color: #ffcb05;
+    opacity: 0.5;
+    max-height: 28vh;
+    max-width: 28vh;
 }
