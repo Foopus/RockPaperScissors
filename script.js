@@ -1,6 +1,61 @@
-/* Rock Paper Scissors */
+// PSEUDOCODE
+/* Fire Water Grass */
+
+/*
+1. Create insructional text with a button to begin, store this in a function called gameStart
+    where scores are reset and calling upon the function will resart the game.
+2. When button is clicked change text to selection instructions, activate pokemon image on mousover while hovering
+    over balls.
+3. On click of selection, play sound and run game.
+4. Display text with results and effects. Add to score counter.
+5. When either win or loss count reaches 5, change text to final results and display button
+    that resets via gameStart function.
+*/
+let count = 0
+let wins = 0
+let losses = 0
+let draws = 0
+
+function setChar(){
+    document.getElementById("fire").src="images/charmander.png";  
+}
+function setSqui(){
+    document.getElementById("water").src="images/squirtle.png";
+}
+function setBulb(){
+    document.getElementById("grass").src="images/bulbasaur.png";
+}
+function fireBall(){
+    document.getElementById("fire").src="images/pokeball.png";
+}
+function waterBall(){
+    document.getElementById("water").src="images/pokeball.png";
+}
+function grassBall(){
+    document.getElementById("grass").src="images/pokeball.png";
+}
+
+const winId = document.querySelector("#wins");
+const winCount = document.createElement("span");
+    winCount.classList.add("winCount");
+    winCount.textContent =`${ wins}`;
+winId.appendChild(winCount);
+
+const lossesId = document.querySelector("#losses");
+const lossesCount = document.createElement("span");
+    lossesCount.classList.add("lossesCount");
+    lossesCount.textContent =`${ losses}`;
+lossesId.appendChild(lossesCount);
+
+const drawsId = document.querySelector("#draws");
+const drawsCount = document.createElement("span");
+    drawsCount.classList.add("drawsCount");
+    drawsCount.textContent =`${ draws}`;
+drawsId.appendChild(drawsCount);
+
 
 // PSEUDOCODE
+/* Rock Paper Scissors */
 
 /* Declare variables to represent computer answer, user answer, game count, win/loss/draw count.
 Create a function that randomly selects the computers answer from an array.
@@ -12,10 +67,7 @@ Lastly an end game alert. */
 
 // THIS PORTION DECLARES THE GLOBAL SCORE COUNT AND NEEDED VARIABLES.
 
-let count = 0
-let wins = 0
-let losses = 0
-let draws = 0
+
 
 let computerSelection;
 let playerSelection;

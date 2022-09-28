@@ -36,9 +36,9 @@
                     <ul class="gameAreaFlx">
                         
                         <li class="gameScore">
-                            <span class="wins">Wins:</span>
-                            <span class="losses">Losses:</span>
-                            <span class="draws">Draws:</span>
+                            <span id="wins">Wins: </span>
+                            <span id="losses">Losses: </span>
+                            <span id="draws">Draws: </span>
                         </li>
 
                         <li class="gameDisplay">
@@ -48,9 +48,9 @@
                         </li>
 
                         <li class="gameSelection">
-                            <img class="fire, selection" src="images/pokeball.png" alt="Pokeball">
-                            <img class="water, selection" src="images/pokeball.png" alt="Pokeball">
-                            <img class="grass, selection" src="images/pokeball.png" alt="Pokeball">
+                            <img id="fire" class="selection" onmouseover="setChar()" onmouseout="fireBall()"  src="images/pokeball.png" alt="Pokeball">
+                            <img id="water" class="selection" onmouseover="setSqui()" onmouseout="waterBall()" src="images/pokeball.png" alt="Pokeball">
+                            <img id="grass" class="selection" onmouseover="setBulb()" onmouseout="grassBall()" src="images/pokeball.png" alt="Pokeball">
                        </li>
                    </ul>
                 </li>
