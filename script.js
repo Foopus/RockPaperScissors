@@ -2,19 +2,31 @@
 /* Fire Water Grass */
 
 /*
-1. Create insructional text with a button to begin, store this in a function called gameStart
+1. Create insructional text with a button to begin, store this in a function called gameReset
     where scores are reset and calling upon the function will resart the game.
-2. When button is clicked change text to selection instructions, activate pokemon image on mousover while hovering
+2. When button is clicked change text to selection instructions, activate 
+    pokemon image on mousover while hovering
     over balls.
 3. On click of selection, play sound and run game.
 4. Display text with results and effects. Add to score counter.
 5. When either win or loss count reaches 5, change text to final results and display button
     that resets via gameStart function.
 */
-let count = 0
-let wins = 0
-let losses = 0
-let draws = 0
+
+let count = 0;
+let wins = 0;
+let losses = 0;
+let draws = 0;
+
+function gameReset(){
+    
+    count = 0;
+    wins = 0;
+    losses = 0;
+    draws = 0;
+
+    
+} 
 
 function setChar(){
     document.getElementById("fire").src="images/charmander.png";  

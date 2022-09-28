@@ -16,6 +16,11 @@ body {
     font-family: pokefont;
     src: url(font/Pokemon\ Hollow.ttf);
 }
+
+@font-face {
+    font-family: pokegame;
+    src: url(font/Pokemon\ Game.ttf);
+}
   
 h2 {
     font-family: pokeFont;
@@ -165,10 +170,10 @@ img.selection {
 
 .gameDisplay {
     display: flex;
-    background-color: aliceblue;
-    opacity: 0.5;
+    background: rgba(240, 248, 255, 0.5);
     margin: 3vh 2vw;
     max-height: 28vh;
+    border-radius: 4px;
 }
 
 .window {
@@ -176,4 +181,40 @@ img.selection {
     opacity: 0.5;
     max-height: 28vh;
     max-width: 28vh;
+    border-radius: 4px;
+}
+
+#textArea {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    font-family: pokegame;
+    color: #262727;
+    font-size: 1.2vw;
+    text-align: center;
+    border-radius: 6px;
+    border-color: #6d6d6d;
+    border-style: ridge;
+    border-width: 8px;
+    max-height: 26.5vh;
+    
+}
+
+#displayedText {
+    margin: 1vw 2vw;
+}
+
+#button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: #003a70;
+    font-family: pokefont;
+    color: #ffcb05;
+    font-size: 1.2vw;
+    font-weight: bolder;
+    margin: 1.5vw;
+    padding: 0.5vw 1.5vw;
+    border-radius: 6px;
 }
