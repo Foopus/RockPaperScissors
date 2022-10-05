@@ -18,15 +18,13 @@ let wins = 0;
 let losses = 0;
 let draws = 0;
 
-function gameReset(){
-    
-    count = 0;
-    wins = 0;
-    losses = 0;
-    draws = 0;
+const displayedText = document.querySelector("#displayedText");
+const displayedButton = document.querySelector("#buttonDiv");
 
-    
-} 
+const clickFire = document.querySelector('#fire');
+const clickWater = document.querySelector('#water');
+const clickGrass = document.querySelector('#grass');
+
 
 function setChar(){
     document.getElementById("fire").src="images/charmander.png";  
@@ -64,6 +62,113 @@ const drawsCount = document.createElement("span");
     drawsCount.classList.add("drawsCount");
     drawsCount.textContent =`${ draws}`;
 drawsId.appendChild(drawsCount);
+
+
+const startText = "Time to fuck up Gary! Click to begin game. First to 5 wins!";
+const startButton = "Play";
+
+const choiceText = "Choose your Pokemon!"
+
+const playButton = "Fuck 'em up!"
+
+function gameReset(){
+    // Resets the score counter
+
+    count = 0;
+    wins = 0;
+    losses = 0;
+    draws = 0;
+
+}
+
+const addText1 = document.createElement("div1");
+const addButton = document.createElement("button");
+
+function interfaceText(insertText){
+    // Inserts text via DOM tree
+      
+    addText1.classList.add("addText1");
+    addText1.textContent = `${insertText}`;
+        
+    displayedText.appendChild(addText1);
+}
+
+function interfaceButton(insertButton){
+    // Inserts button via DOM tree
+
+    addButton.classList.add("addButton");
+    addButton.textContent = `${insertButton}`;
+    
+    displayedButton.appendChild(addButton);
+} 
+
+interfaceText(startText);
+interfaceButton(startButton);
+
+function removeText(){
+    const textParent = document.getElementById("displayedText");
+    textParent.removeChild(addText1);
+}
+
+function removeButton(){
+    const buttonParent = document.getElementById("buttonDiv");
+    buttonParent.removeChild(addButton); 
+}
+
+function choosePokemon(){
+
+    clickFire.addEventListener('click', (e) => {
+        const choice = "FIRE"
+        removeText();
+        console.log(`${choice}`);
+        interfaceButton(playButton);
+        interfaceText(`You chose ${choice}!`);
+        addText1.style.cssText = 'color: red;';
+    });
+    
+    clickWater.addEventListener('click', (e) => {
+        const choice = "WATER"
+        removeText();
+        console.log(`${choice}`);
+        interfaceButton(playButton);
+        interfaceText(`You chose ${choice}!`);
+        addText1.style.cssText = 'color: blue;';
+    });
+
+    clickGrass.addEventListener('click', (e) => {
+        const choice = "GRASS"
+        removeText();
+        console.log(`${choice}`);
+        interfaceButton(playButton);
+        interfaceText(`You chose ${choice}!`);
+        addText1.style.cssText = 'color: green;';
+    });
+}
+
+    
+function beginClick(){
+    
+    displayedButton.addEventListener('click', (e) => {
+
+    removeText();
+    removeButton();
+    interfaceText(choiceText);
+    console.log('First Click');
+    choosePokemon();
+});
+}
+
+beginClick();
+
+
+
+
+// gameReset();
+
+// displayedButton.addEventListener('click', (e) => {
+//     gameSelect();
+//     alert('click');
+// }); 
 
 
 // PSEUDOCODE
