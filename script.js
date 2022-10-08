@@ -25,6 +25,77 @@ const clickFire = document.querySelector('#fire');
 const clickWater = document.querySelector('#water');
 const clickGrass = document.querySelector('#grass');
 
+const yourChoice = document.querySelector('#choice');
+
+// THIS PORTION DECLARES THE GLOBAL SCORE COUNT AND NEEDED VARIABLES FOR GAME PORTION.
+
+let computerSelection;
+let playerSelection;
+
+let roundDraw;
+let roundLoss;
+let roundNull;
+let roundWin;
+
+let userInput;
+
+// THIS PORTION CHECKS THE ANSWER AGAINST THE COMPUTER'S, LOG'S THE RESULT, CONFIRMS VALIDITY OF ANSWER, AND ADDS TO SCORE AND GAME COUNT.
+
+function playRound(A, B){
+
+    console.log("You chose " + B);
+    console.log("Gary chose " + A);
+
+
+    if (A === B){
+        draws += 1;
+    return roundDraw;
+    } 
+    
+    else if ((B == "FIRE" && A == "GRASS")||
+    (B == "GRASS" && A == "WATER")||
+    (B == "WATER" && A == "FIRE")){
+        wins += 1;
+        return roundWin;
+    }
+
+    else if((A == "FIRE" && B == "GRASS")||
+    (A == "GRASS" && B == "WATER")||
+    (A == "WATER" && B == "FIRE")){
+        losses += 1;
+    return roundLoss;
+    }
+
+    else {
+    return roundNull;
+    }
+
+    // once: true ;
+}
+
+// This code creates the <img> element in the DOM of the selected choice
+
+const addBlankImg = document.createElement("div");
+      addBlankImg.classList.add("choiceImg");
+
+document.querySelector('#choice').appendChild(addBlankImg);
+
+const addCharImg = document.createElement("img");
+    addCharImg.src="images/charmander.png";
+    addCharImg.className="choiceImg";
+    addCharImg.classList.add("choiceImg");
+
+const addSquiImg = document.createElement("img");
+    addSquiImg.src="images/squirtle.png";
+    addSquiImg.className="choiceImg";
+    // addSquiImg.classList.add("choiceImg");
+
+const addBulbImg = document.createElement("img");
+    addBulbImg.src="images/bulbasaur.png";
+    addBulbImg.className="choiceImg";
+    // addBulbImg.classList.add("choiceImg");
+
+// Here are the mouseover and off effects on the possible selecions
 
 function setChar(){
     document.getElementById("fire").src="images/charmander.png";  
@@ -63,6 +134,7 @@ const drawsCount = document.createElement("span");
     drawsCount.textContent =`${ draws}`;
 drawsId.appendChild(drawsCount);
 
+// Here are the stored display messages and buttons
 
 const startText = "Time to fuck up Gary! Click to begin game. First to 5 wins!";
 const startButton = "Play";
@@ -70,6 +142,12 @@ const startButton = "Play";
 const choiceText = "Choose your Pokemon!"
 
 const playButton = "Fuck 'em up!"
+
+
+const addText1 = document.createElement("div1");
+const addButton = document.createElement("button1");
+// const addButton2 = document.createElement("button2");
+
 
 function gameReset(){
     // Resets the score counter
@@ -80,9 +158,6 @@ function gameReset(){
     draws = 0;
 
 }
-
-const addText1 = document.createElement("div1");
-const addButton = document.createElement("button");
 
 function interfaceText(insertText){
     // Inserts text via DOM tree
@@ -100,7 +175,19 @@ function interfaceButton(insertButton){
     addButton.textContent = `${insertButton}`;
     
     displayedButton.appendChild(addButton);
-} 
+}
+
+// THIS FUNCTION RETURNS THE CUMPUTER SELECTION RANDOMLY FROM AN ARRAY.
+
+function computerPlay(){
+    
+    const ansArray = ["GRASS", "WATER", "FIRE"];
+    const computerRandomAnswer = Math.floor(Math.random() * ansArray.length);
+    //console.log(ansArray[computerRandomAnswer]);
+    computerSelection = ansArray[computerRandomAnswer];
+
+    return computerSelection;
+}
 
 interfaceText(startText);
 interfaceButton(startButton);
@@ -113,36 +200,54 @@ function removeText(){
 function removeButton(){
     const buttonParent = document.getElementById("buttonDiv");
     buttonParent.removeChild(addButton); 
+    // displayedButton.removeEventListener('click');
 }
 
 function choosePokemon(){
 
     clickFire.addEventListener('click', (e) => {
-        const choice = "FIRE"
+        playerSelection = "FIRE"
         removeText();
-        console.log(`${choice}`);
+        console.log(`${playerSelection}`);
         interfaceButton(playButton);
-        interfaceText(`You chose ${choice}!`);
+        interfaceText(`You chose ${playerSelection}!`);
         addText1.style.cssText = 'color: red;';
+        
+        yourChoice.removeChild(yourChoice.firstElementChild);
+        document.querySelector('#choice').appendChild(addCharImg);
     });
     
     clickWater.addEventListener('click', (e) => {
-        const choice = "WATER"
+        playerSelection = "WATER"
         removeText();
-        console.log(`${choice}`);
+        console.log(`${playerSelection}`);
         interfaceButton(playButton);
-        interfaceText(`You chose ${choice}!`);
+        interfaceText(`You chose ${playerSelection}!`);
         addText1.style.cssText = 'color: blue;';
+
+        yourChoice.removeChild(yourChoice.firstElementChild);
+        document.querySelector('#choice').appendChild(addSquiImg);
     });
 
     clickGrass.addEventListener('click', (e) => {
-        const choice = "GRASS"
+        playerSelection = "GRASS"
         removeText();
-        console.log(`${choice}`);
+        console.log(`${playerSelection}`);
         interfaceButton(playButton);
-        interfaceText(`You chose ${choice}!`);
+        interfaceText(`You chose ${playerSelection}!`);
         addText1.style.cssText = 'color: green;';
+
+        yourChoice.removeChild(yourChoice.firstElementChild);
+        document.querySelector('#choice').appendChild(addBulbImg);
     });
+
+    displayedButton.addEventListener('click', (e) => {
+
+        computerPlay();
+        playRound(computerSelection, playerSelection);
+        // game();
+    }, { once: true });
+    
 }
 
     
@@ -153,10 +258,10 @@ function beginClick(){
     removeText();
     removeButton();
     interfaceText(choiceText);
-    console.log('First Click');
     choosePokemon();
-});
+}, { once: true });
 }
+
 
 beginClick();
 
@@ -182,93 +287,29 @@ Create 'for' loop such that the game restarts with parameters reset each iterata
 count outside of game updates and plays 5 games.
 Lastly an end game alert. */
 
-// THIS PORTION DECLARES THE GLOBAL SCORE COUNT AND NEEDED VARIABLES.
-
-
-
-let computerSelection;
-let playerSelection;
-
-let roundDraw;
-let roundLoss;
-let roundNull;
-let roundWin;
-
-let userInput;
-
-// THIS FUNCTION RETURNS THE CUMPUTER SELECTION RANDOMLY FROM AN ARRAY.
-
-function computerPlay()
-
-{
-    
-    const ansArray = ["Rock", "Paper", "Scissors"]
-    const computerRandomAnswer = Math.floor(Math.random() * ansArray.length);
-    //console.log(ansArray[computerRandomAnswer]);
-    computerSelection = ansArray[computerRandomAnswer];
-
-    return computerSelection;
-    
-}
-
-
 
 // THIS FUNCTION TAKES IN THE USER INPUT AND AND FORMATS IT TO START WITH A CAPITAL AND FORMAT THE REST TO LOWER CASE AND RETURNS THE PLAYER SELECTION. 
 
-function userPlay()
+// function userPlay()
 
-{
-
-
-   function textFormat(){
-
-        let cap = userInput.slice(0, 1);
-        let rest = userInput.slice(1);
-        cap = cap.toUpperCase();
-        rest = rest.toLowerCase();
-
-        return (cap + rest);
-    }
-
-    playerSelection = textFormat(userInput);
-
-    return playerSelection;
-}
+// {
 
 
+//    function textFormat(){
 
-// THIS PORTION CHECKS THE ANSWER AGAINST THE COMPUTER'S, LOG'S THE RESULT, CONFIRMS VALIDITY OF ANSWER, AND ADDS TO SCORE AND GAME COUNT.
+//         let cap = userInput.slice(0, 1);
+//         let rest = userInput.slice(1);
+//         cap = cap.toUpperCase();
+//         rest = rest.toLowerCase();
 
-function playRound(A, B){
+//         return (cap + rest);
+//     }
 
-    console.log("You chose " + B);
-    console.log("The computer chose " + A);
+//     playerSelection = textFormat(userInput);
 
+//     return playerSelection;
+// }
 
-    if (A === B){
-        draws += 1;
-    return roundDraw;
-    } 
-    
-    else if ((B == "Rock" && A == "Scissors")||
-    (B == "Scissors" && A == "Paper")||
-    (B == "Paper" && A == "Rock")){
-        wins += 1;
-        return roundWin;
-    }
-
-    else if((A == "Rock" && B == "Scissors")||
-    (A == "Scissors" && B == "Paper")||
-    (A == "Paper" && B == "Rock")){
-        losses += 1;
-    return roundLoss;
-    }
-
-    else {
-    return roundNull;
-    }
-
-}
 
 
 // THIS FUNCTION TAKES THE INPUTS FROM THE PRIVIOUS FUCNTIONS AND PLAYS 5 GAMES, NOT COUNTING GAMES WITH INVALID INPUTS.
@@ -279,17 +320,16 @@ function game()
    
     for (count = 0; count < 5; ){
 
-    computerPlay();
-    //console.log(computerSelection);
-    userInput = prompt("Please type Rock, Paper or Scissors","");
-    userPlay();
+    // computerPlay();
+    // userInput = prompt("Please type Rock, Paper or Scissors","");
+    // userPlay();
 
     roundDraw = "It's a draw! Let's play again!";
     roundLoss = `You lose! ${computerSelection} beats ${playerSelection}`;
     roundWin = `You win! ${playerSelection} beats ${computerSelection}!`;
     roundNull = `You lose! ${computerSelection} beats ${playerSelection}.You have to type Rock, Paper or Scissors you spineless slug!! We won't count your insolence. Play again.`;
     
-    console.log(playRound(computerSelection, playerSelection));
+    // console.log(playRound(computerSelection, playerSelection));
  
     count = parseInt(wins + losses + draws);   
 
