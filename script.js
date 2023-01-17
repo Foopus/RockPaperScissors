@@ -7,7 +7,7 @@
 2. When button is clicked change text to selection instructions, activate 
     pokemon image on mousover while hovering
     over balls.
-3. On click of selection, play sound and run game.
+3. On click of selection run game.
 4. Display text with results and effects. Add to score counter.
 5. When either win or loss count reaches 5, change text to final results and display button
     that resets via gameStart function.
@@ -26,16 +26,17 @@ const clickWater = document.querySelector('#water');
 const clickGrass = document.querySelector('#grass');
 
 const yourChoice = document.querySelector('#choice');
+let allowChoice;
 
 // THIS PORTION DECLARES THE GLOBAL SCORE COUNT AND NEEDED VARIABLES FOR GAME PORTION.
 
 let computerSelection;
 let playerSelection;
 
-let roundDraw;
-let roundLoss;
+let roundDraw ;
+let roundLoss ;
 let roundNull;
-let roundWin;
+let roundWin ;
 
 let userInput;
 
@@ -46,31 +47,42 @@ function playRound(A, B){
     console.log("You chose " + B);
     console.log("Gary chose " + A);
 
+    roundDraw = "It's a draw! Let's play again!";
+    roundLoss = `You lose! ${computerSelection} beats ${playerSelection}`;
+    roundWin = `You win! ${playerSelection} beats ${computerSelection}!`;
+
 
     if (A === B){
         draws += 1;
-    return roundDraw;
+        console.log(roundDraw);
+        //return roundDraw;
+    
     } 
     
     else if ((B == "FIRE" && A == "GRASS")||
     (B == "GRASS" && A == "WATER")||
     (B == "WATER" && A == "FIRE")){
         wins += 1;
-        return roundWin;
+        console.log(roundWin);
+        //return roundWin;
+        
     }
 
     else if((A == "FIRE" && B == "GRASS")||
     (A == "GRASS" && B == "WATER")||
     (A == "WATER" && B == "FIRE")){
         losses += 1;
-    return roundLoss;
+        console.log(roundLoss);
+        //return roundLoss;
+        
     }
 
     else {
-    return roundNull;
+    //return roundNull;
     }
 
-    // once: true ;
+    console.log("Wins: " + wins + " Losses: " + losses + " Draws: " + draws + " Games Played: " + count);
+
 }
 
 // This code creates the <img> element in the DOM of the selected choice
@@ -83,17 +95,15 @@ document.querySelector('#choice').appendChild(addBlankImg);
 const addCharImg = document.createElement("img");
     addCharImg.src="images/charmander.png";
     addCharImg.className="choiceImg";
-    addCharImg.classList.add("choiceImg");
 
 const addSquiImg = document.createElement("img");
     addSquiImg.src="images/squirtle.png";
     addSquiImg.className="choiceImg";
-    // addSquiImg.classList.add("choiceImg");
 
 const addBulbImg = document.createElement("img");
     addBulbImg.src="images/bulbasaur.png";
     addBulbImg.className="choiceImg";
-    // addBulbImg.classList.add("choiceImg");
+
 
 // Here are the mouseover and off effects on the possible selecions
 
@@ -146,7 +156,8 @@ const playButton = "Fuck 'em up!"
 
 const addText1 = document.createElement("div1");
 const addButton = document.createElement("button1");
-// const addButton2 = document.createElement("button2");
+const addButtonPlay = document.createElement("button2");
+const buttonPlay = document.querySelector("button2")
 
 
 function gameReset(){
@@ -177,6 +188,16 @@ function interfaceButton(insertButton){
     displayedButton.appendChild(addButton);
 }
 
+function interfaceButtonPlay(insertButton){
+    // Inserts button via DOM tree
+
+    addButtonPlay.classList.add("addButton");
+    addButtonPlay.textContent = `${insertButton}`;
+    
+    displayedButton.appendChild(addButtonPlay);
+
+}
+
 // THIS FUNCTION RETURNS THE CUMPUTER SELECTION RANDOMLY FROM AN ARRAY.
 
 function computerPlay(){
@@ -203,49 +224,77 @@ function removeButton(){
     // displayedButton.removeEventListener('click');
 }
 
-function choosePokemon(){
+//These functions allow the user to make a selection and for that selection to appear in the window
 
-    clickFire.addEventListener('click', (e) => {
-        playerSelection = "FIRE"
+function chooseFire(){
+    playerSelection = "FIRE"
         removeText();
         console.log(`${playerSelection}`);
-        interfaceButton(playButton);
+        interfaceButtonPlay(playButton);
         interfaceText(`You chose ${playerSelection}!`);
         addText1.style.cssText = 'color: red;';
         
         yourChoice.removeChild(yourChoice.firstElementChild);
         document.querySelector('#choice').appendChild(addCharImg);
-    });
-    
-    clickWater.addEventListener('click', (e) => {
-        playerSelection = "WATER"
+        
+}
+function chooseWater(){
+    playerSelection = "WATER"
         removeText();
         console.log(`${playerSelection}`);
-        interfaceButton(playButton);
+        interfaceButtonPlay(playButton);
         interfaceText(`You chose ${playerSelection}!`);
         addText1.style.cssText = 'color: blue;';
 
         yourChoice.removeChild(yourChoice.firstElementChild);
         document.querySelector('#choice').appendChild(addSquiImg);
-    });
-
-    clickGrass.addEventListener('click', (e) => {
-        playerSelection = "GRASS"
+        
+}
+function chooseGrass(){
+    playerSelection = "GRASS"
         removeText();
         console.log(`${playerSelection}`);
-        interfaceButton(playButton);
+        interfaceButtonPlay(playButton);
         interfaceText(`You chose ${playerSelection}!`);
         addText1.style.cssText = 'color: green;';
 
         yourChoice.removeChild(yourChoice.firstElementChild);
         document.querySelector('#choice').appendChild(addBulbImg);
-    });
+        
+}
 
+function choiceListenRemove(){
+    clickFire.removeEventListener('click', chooseFire());
+    clickWater.removeEventListener('click', chooseWater());
+    clickGrass.removeEventListener('click', chooseGrass());
+    console.log('Please remove the Event Listener');
+}
+
+function choiceListenAdd(){
+    clickFire.addEventListener('click', () => {
+        chooseFire();
+    });
+    clickWater.addEventListener('click', () => {
+        chooseWater();
+    });
+    clickGrass.addEventListener('click', () => {
+        chooseGrass();
+    });
+}
+
+// This function adds click listeners on choices and adds click listener on button triggers
+// the computer selection
+
+function choosePokemon(){
+
+    choiceListenAdd();
+   
     displayedButton.addEventListener('click', (e) => {
 
         computerPlay();
         playRound(computerSelection, playerSelection);
-        // game();
+        
+        //game();
     }, { once: true });
     
 }
