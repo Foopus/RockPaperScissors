@@ -39,6 +39,7 @@ let roundNull;
 let roundWin ;
 
 let userInput;
+let result;
 
 // THIS PORTION CHECKS THE ANSWER AGAINST THE COMPUTER'S, LOG'S THE RESULT, CONFIRMS VALIDITY OF ANSWER, AND ADDS TO SCORE AND GAME COUNT.
 
@@ -55,7 +56,7 @@ function playRound(A, B){
     if (A === B){
         draws += 1;
         console.log(roundDraw);
-        //return roundDraw;
+        result = roundDraw;
     
     } 
     
@@ -64,7 +65,7 @@ function playRound(A, B){
     (B == "WATER" && A == "FIRE")){
         wins += 1;
         console.log(roundWin);
-        //return roundWin;
+        result = roundWin;
         
     }
 
@@ -73,7 +74,7 @@ function playRound(A, B){
     (A == "WATER" && B == "FIRE")){
         losses += 1;
         console.log(roundLoss);
-        //return roundLoss;
+        result = roundLoss;
         
     }
 
@@ -81,8 +82,28 @@ function playRound(A, B){
     //return roundNull;
     }
 
+    count = parseInt(wins + losses + draws);
     console.log("Wins: " + wins + " Losses: " + losses + " Draws: " + draws + " Games Played: " + count);
 
+        const winId = document.querySelector("#wins");
+    const winCount = document.createElement("span");
+        winCount.classList.add("winCount");
+        winCount.textContent =`${ wins}`;
+    winId.appendChild(winCount);
+
+    const lossesId = document.querySelector("#losses");
+    const lossesCount = document.createElement("span");
+        lossesCount.classList.add("lossesCount");
+        lossesCount.textContent =`${ losses}`;
+    lossesId.appendChild(lossesCount);
+
+    const drawsId = document.querySelector("#draws");
+    const drawsCount = document.createElement("span");
+        drawsCount.classList.add("drawsCount");
+        drawsCount.textContent =`${ draws}`;
+    drawsId.appendChild(drawsCount);
+
+    
 }
 
 // This code creates the <img> element in the DOM of the selected choice
@@ -126,23 +147,7 @@ function grassBall(){
     document.getElementById("grass").src="images/pokeball.png";
 }
 
-const winId = document.querySelector("#wins");
-const winCount = document.createElement("span");
-    winCount.classList.add("winCount");
-    winCount.textContent =`${ wins}`;
-winId.appendChild(winCount);
 
-const lossesId = document.querySelector("#losses");
-const lossesCount = document.createElement("span");
-    lossesCount.classList.add("lossesCount");
-    lossesCount.textContent =`${ losses}`;
-lossesId.appendChild(lossesCount);
-
-const drawsId = document.querySelector("#draws");
-const drawsCount = document.createElement("span");
-    drawsCount.classList.add("drawsCount");
-    drawsCount.textContent =`${ draws}`;
-drawsId.appendChild(drawsCount);
 
 // Here are the stored display messages and buttons
 
@@ -151,13 +156,14 @@ const startButton = "Play";
 
 const choiceText = "Choose your Pokemon!"
 
+
 const playButton = "Fuck 'em up!"
 
 
 const addText1 = document.createElement("div1");
 const addButton = document.createElement("button1");
 const addButtonPlay = document.createElement("button2");
-const buttonPlay = document.querySelector("button2")
+
 
 
 function gameReset(){
@@ -293,6 +299,11 @@ function choosePokemon(){
 
         computerPlay();
         playRound(computerSelection, playerSelection);
+        displayedButton.removeChild(addButtonPlay);
+        removeText();
+        console.log(count);
+        interfaceText(result);
+        addText1.style.cssText = 'color: #262727';
         
         //game();
     }, { once: true });
