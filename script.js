@@ -158,11 +158,12 @@ const choiceText = "Choose your Pokemon!"
 
 
 const playButton = "Fuck 'em up!"
-
+const playAgainButton = "Play Next Round!"
 
 const addText1 = document.createElement("div1");
 const addButton = document.createElement("button1");
 const addButtonPlay = document.createElement("button2");
+const addButtonPlayAgain = document.createElement("button3");
 
 
 
@@ -201,6 +202,16 @@ function interfaceButtonPlay(insertButton){
     addButtonPlay.textContent = `${insertButton}`;
     
     displayedButton.appendChild(addButtonPlay);
+
+}
+
+function interfaceButtonPlayAgain(insertButton){
+    // Inserts button via DOM tree
+
+    addButtonPlayAgain.classList.add("addButton");
+    addButtonPlayAgain.textContent = `${insertButton}`;
+    
+    displayedButton.appendChild(addButtonPlayAgain);
 
 }
 
@@ -269,26 +280,33 @@ function chooseGrass(){
         
 }
 
-function choiceListenRemove(){
-    clickFire.removeEventListener('click', chooseFire());
-    clickWater.removeEventListener('click', chooseWater());
-    clickGrass.removeEventListener('click', chooseGrass());
-    console.log('Please remove the Event Listener');
+// Here we store our functions that activate the choice click listeners in a variable
+// such that we may may use he removeEventListener() method which does not work with anonymous 
+// functions.
+
+const charmander = function anonFire(){
+    chooseFire();
+}
+const squirtle = function anonWater(){
+    chooseWater();
+}
+const bulbasaur = function anonGrass(){
+    chooseGrass();
 }
 
 function choiceListenAdd(){
-    clickFire.addEventListener('click', () => {
-        chooseFire();
-    });
-    clickWater.addEventListener('click', () => {
-        chooseWater();
-    });
-    clickGrass.addEventListener('click', () => {
-        chooseGrass();
-    });
+    clickFire.addEventListener('click', charmander);
+    clickWater.addEventListener('click', squirtle);
+    clickGrass.addEventListener('click', bulbasaur);
 }
 
-// This function adds click listeners on choices and adds click listener on button triggers
+function choiceListenRemove(){
+    clickFire.removeEventListener('click', charmander);
+    clickWater.removeEventListener('click', squirtle);
+    clickGrass.removeEventListener('click', bulbasaur);
+}   
+
+// This function adds click listeners on choices and adds click listener on the button triggers
 // the computer selection
 
 function choosePokemon(){
@@ -304,6 +322,8 @@ function choosePokemon(){
         console.log(count);
         interfaceText(result);
         addText1.style.cssText = 'color: #262727';
+        interfaceButtonPlayAgain(playAgainButton);
+        choiceListenRemove();
         
         //game();
     }, { once: true });
