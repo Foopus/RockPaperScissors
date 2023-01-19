@@ -84,26 +84,10 @@ function playRound(A, B){
 
     count = parseInt(wins + losses + draws);
     console.log("Wins: " + wins + " Losses: " + losses + " Draws: " + draws + " Games Played: " + count);
-
-        const winId = document.querySelector("#wins");
-    const winCount = document.createElement("span");
-        winCount.classList.add("winCount");
-        winCount.textContent =`${ wins}`;
-    winId.appendChild(winCount);
-
-    const lossesId = document.querySelector("#losses");
-    const lossesCount = document.createElement("span");
-        lossesCount.classList.add("lossesCount");
-        lossesCount.textContent =`${ losses}`;
-    lossesId.appendChild(lossesCount);
-
-    const drawsId = document.querySelector("#draws");
-    const drawsCount = document.createElement("span");
-        drawsCount.classList.add("drawsCount");
-        drawsCount.textContent =`${ draws}`;
-    drawsId.appendChild(drawsCount);
-
     
+    winCount.textContent =`${ wins}`;
+    lossesCount.textContent =`${ losses}`;
+    drawsCount.textContent =`${ draws}`;
 }
 
 // This code creates the <img> element in the DOM of the selected choice
@@ -167,6 +151,7 @@ const addButtonPlayAgain = document.createElement("button3");
 
 
 
+
 function gameReset(){
     // Resets the score counter
 
@@ -212,7 +197,13 @@ function interfaceButtonPlayAgain(insertButton){
     addButtonPlayAgain.textContent = `${insertButton}`;
     
     displayedButton.appendChild(addButtonPlayAgain);
-
+    displayedButton.addEventListener('click', () => {
+    
+        removeText();
+        removeButtonReset();
+        interfaceText(choiceText);
+        choosePokemonAgain();
+    }, {once: true});
 }
 
 // THIS FUNCTION RETURNS THE CUMPUTER SELECTION RANDOMLY FROM AN ARRAY.
@@ -238,7 +229,11 @@ function removeText(){
 function removeButton(){
     const buttonParent = document.getElementById("buttonDiv");
     buttonParent.removeChild(addButton); 
-    // displayedButton.removeEventListener('click');
+}
+
+function removeButtonReset(){
+    const buttonParent = document.getElementById("buttonDiv");
+    buttonParent.removeChild(buttonParent.firstElementChild); 
 }
 
 //These functions allow the user to make a selection and for that selection to appear in the window
@@ -250,10 +245,13 @@ function chooseFire(){
         interfaceButtonPlay(playButton);
         interfaceText(`You chose ${playerSelection}!`);
         addText1.style.cssText = 'color: red;';
-        
-        yourChoice.removeChild(yourChoice.firstElementChild);
+
+        if (yourChoice.firstElementChild == null){
+            document.querySelector('#choice').appendChild(addCharImg);
+            
+        } else { yourChoice.removeChild(yourChoice.firstElementChild);
         document.querySelector('#choice').appendChild(addCharImg);
-        
+        }
 }
 function chooseWater(){
     playerSelection = "WATER"
@@ -263,9 +261,12 @@ function chooseWater(){
         interfaceText(`You chose ${playerSelection}!`);
         addText1.style.cssText = 'color: blue;';
 
-        yourChoice.removeChild(yourChoice.firstElementChild);
+        if (yourChoice.firstElementChild == null){
+            document.querySelector('#choice').appendChild(addSquiImg);
+
+        } else { yourChoice.removeChild(yourChoice.firstElementChild);
         document.querySelector('#choice').appendChild(addSquiImg);
-        
+        }
 }
 function chooseGrass(){
     playerSelection = "GRASS"
@@ -275,9 +276,12 @@ function chooseGrass(){
         interfaceText(`You chose ${playerSelection}!`);
         addText1.style.cssText = 'color: green;';
 
-        yourChoice.removeChild(yourChoice.firstElementChild);
+        if (yourChoice.firstElementChild == null){
+            document.querySelector('#choice').appendChild(addBulbImg);
+            
+        } else { yourChoice.removeChild(yourChoice.firstElementChild);
         document.querySelector('#choice').appendChild(addBulbImg);
-        
+        }      
 }
 
 // Here we store our functions that activate the choice click listeners in a variable
@@ -309,15 +313,18 @@ function choiceListenRemove(){
 // This function adds click listeners on choices and adds click listener on the button triggers
 // the computer selection
 
+
+
 function choosePokemon(){
 
+    console.log("Choose PKM Function Run")
     choiceListenAdd();
    
-    displayedButton.addEventListener('click', (e) => {
+    displayedButton.addEventListener('click', () => {
 
         computerPlay();
         playRound(computerSelection, playerSelection);
-        displayedButton.removeChild(addButtonPlay);
+        displayedButton.removeChild(displayedButton.firstElementChild);
         removeText();
         console.log(count);
         interfaceText(result);
@@ -325,25 +332,91 @@ function choosePokemon(){
         interfaceButtonPlayAgain(playAgainButton);
         choiceListenRemove();
         
-        //game();
-    }, { once: true });
+    }, {once: true});
     
 }
 
+function choosePokemonAgain(){
+
+    console.log("Choose PKM Again Function Run")
+
+    let iChooseYou = document.querySelector('#choice')
+    if (iChooseYou.firstElementChild !== null) {
+        iChooseYou.removeChild(iChooseYou.firstElementChild);
+    } else {
+        console.log("Nothing to remove")
+    }
     
+    choiceListenAdd();
+   
+    displayedButton.addEventListener('click', () => {
+
+        computerPlay();
+        playRound(computerSelection, playerSelection);
+        
+        if (displayedButton.firstElementChild !== null){
+            displayedButton.removeChild(displayedButton.firstElementChild);
+        } else { console.log("solved")
+        }
+        removeText();
+        console.log(count);
+        interfaceText(result);
+        addText1.style.cssText = 'color: #262727';
+        interfaceButtonPlayAgain(playAgainButton);
+        choiceListenRemove();
+        },{once: true});
+    
+}
+
+
 function beginClick(){
     
-    displayedButton.addEventListener('click', (e) => {
+    displayedButton.addEventListener('click', function beginClickListener() {
 
     removeText();
     removeButton();
     interfaceText(choiceText);
     choosePokemon();
+    this.removeEventListener('click', beginClickListener);
 }, { once: true });
 }
 
+// This code adds a span element that displays the score. The score input is determined after each round.
+
+const winId = document.querySelector("#wins");
+const winCount = document.createElement("span");
+
+winCount.classList.add("winCount");
+winId.appendChild(winCount);
+
+const lossesId = document.querySelector("#losses");
+const lossesCount = document.createElement("span");
+
+lossesCount.classList.add("lossesCount");
+lossesId.appendChild(lossesCount);
+
+const drawsId = document.querySelector("#draws");
+const drawsCount = document.createElement("span");
+    
+drawsCount.classList.add("drawsCount");
+drawsId.appendChild(drawsCount);
+
+
+// function resetClick(){
+    
+//     button3.addEventListener('click', (e) => {
+    
+//     console.log ("Detected")
+//     removeText();
+//     removeButtonReset();
+//     interfaceText(choiceText);
+//     choosePokemon();
+// }, { once: true });
+// }
+
 
 beginClick();
+
 
 
 
