@@ -138,11 +138,14 @@ function grassBall(){
 const startText = "Time to fuck up Gary! Click to begin game. First to 5 wins!";
 const startButton = "Play";
 
-const choiceText = "Choose your Pokemon!"
+const choiceText = "Choose your Pokemon!";
+const winText = "You win! You're a true champion!";
+const loseText = "You lose! Maybe you should have worked harder loser..";
 
 
-const playButton = "Fuck 'em up!"
-const playAgainButton = "Play Next Round!"
+const playButton = "Fuck 'em up!";
+const playAgainButton = "Play Next Round!";
+const newGame = "New Game";
 
 const addText1 = document.createElement("div1");
 const addButton = document.createElement("button1");
@@ -155,11 +158,54 @@ const addButtonPlayAgain = document.createElement("button3");
 function gameReset(){
     // Resets the score counter
 
+    if (displayedButton.firstElementChild !== null){
+    displayedButton.removeChild(displayedButton.firstElementChild);
+    } else {}
+    
+    removeText();
+    
+    let iChooseYou = document.querySelector('#choice')
+    if (iChooseYou.firstElementChild !== null) {
+        iChooseYou.removeChild(iChooseYou.firstElementChild);
+    } else {
+        alert("This shouldn't pop up")
+    }
+    
+    if (wins == 5){
+        interfaceText(winText);
+    } else {
+        interfaceText(loseText);
+    }
+
     count = 0;
     wins = 0;
     losses = 0;
     draws = 0;
 
+    interfaceButton(newGame);
+    displayedButton.addEventListener('click', function restartGame(){
+        if (displayedButton.firstElementChild !== null){
+            displayedButton.removeChild(displayedButton.firstElementChild);
+        }else{};
+        displayedText.removeChild(displayedText.firstElementChild);
+        
+        interfaceText(startText);
+        interfaceButton(startButton);
+
+        winCount.textContent =`${ wins}`;
+        lossesCount.textContent =`${ losses}`;
+        drawsCount.textContent =`${ draws}`;
+
+        displayedButton.addEventListener('click', function beginClickListener() {
+
+            displayedButton.removeChild(displayedButton.firstElementChild);
+            displayedText.removeChild(displayedText.firstElementChild);
+            interfaceText(choiceText);
+            choosePokemonAgain();
+            this.removeEventListener('click', beginClickListener);
+        }, { once: true });
+
+    }, {once: true})
 }
 
 function interfaceText(insertText){
@@ -202,7 +248,12 @@ function interfaceButtonPlayAgain(insertButton){
         removeText();
         removeButtonReset();
         interfaceText(choiceText);
+        if ((wins !== 5)&&(losses !== 5)){
         choosePokemonAgain();
+        } else {
+            gameReset();
+            console.log("RESET INITIATED");
+        }
     }, {once: true});
 }
 
@@ -212,7 +263,6 @@ function computerPlay(){
     
     const ansArray = ["GRASS", "WATER", "FIRE"];
     const computerRandomAnswer = Math.floor(Math.random() * ansArray.length);
-    //console.log(ansArray[computerRandomAnswer]);
     computerSelection = ansArray[computerRandomAnswer];
 
     return computerSelection;
@@ -317,16 +367,17 @@ function choiceListenRemove(){
 
 function choosePokemon(){
 
-    console.log("Choose PKM Function Run")
     choiceListenAdd();
    
     displayedButton.addEventListener('click', () => {
 
         computerPlay();
         playRound(computerSelection, playerSelection);
-        displayedButton.removeChild(displayedButton.firstElementChild);
+        if (displayedButton.firstElementChild !== null){
+            displayedButton.removeChild(displayedButton.firstElementChild);
+        } else {}
         removeText();
-        console.log(count);
+        console.log(`Round ${count}`);
         interfaceText(result);
         addText1.style.cssText = 'color: #262727';
         interfaceButtonPlayAgain(playAgainButton);
@@ -356,10 +407,9 @@ function choosePokemonAgain(){
         
         if (displayedButton.firstElementChild !== null){
             displayedButton.removeChild(displayedButton.firstElementChild);
-        } else { console.log("solved")
-        }
+        } else {};
         removeText();
-        console.log(count);
+        console.log(`Round ${count}`);
         interfaceText(result);
         addText1.style.cssText = 'color: #262727';
         interfaceButtonPlayAgain(playAgainButton);
@@ -400,20 +450,6 @@ const drawsCount = document.createElement("span");
     
 drawsCount.classList.add("drawsCount");
 drawsId.appendChild(drawsCount);
-
-
-// function resetClick(){
-    
-//     button3.addEventListener('click', (e) => {
-    
-//     console.log ("Detected")
-//     removeText();
-//     removeButtonReset();
-//     interfaceText(choiceText);
-//     choosePokemon();
-// }, { once: true });
-// }
-
 
 beginClick();
 
@@ -467,42 +503,42 @@ Lastly an end game alert. */
 
 // THIS FUNCTION TAKES THE INPUTS FROM THE PRIVIOUS FUCNTIONS AND PLAYS 5 GAMES, NOT COUNTING GAMES WITH INVALID INPUTS.
 
-function game()
+// function game()
 
-{
+// {
    
-    for (count = 0; count < 5; ){
+//     for (count = 0; count < 5; ){
 
-    // computerPlay();
-    // userInput = prompt("Please type Rock, Paper or Scissors","");
-    // userPlay();
+//     // computerPlay();
+//     // userInput = prompt("Please type Rock, Paper or Scissors","");
+//     // userPlay();
 
-    roundDraw = "It's a draw! Let's play again!";
-    roundLoss = `You lose! ${computerSelection} beats ${playerSelection}`;
-    roundWin = `You win! ${playerSelection} beats ${computerSelection}!`;
-    roundNull = `You lose! ${computerSelection} beats ${playerSelection}.You have to type Rock, Paper or Scissors you spineless slug!! We won't count your insolence. Play again.`;
+//     roundDraw = "It's a draw! Let's play again!";
+//     roundLoss = `You lose! ${computerSelection} beats ${playerSelection}`;
+//     roundWin = `You win! ${playerSelection} beats ${computerSelection}!`;
+//     roundNull = `You lose! ${computerSelection} beats ${playerSelection}.You have to type Rock, Paper or Scissors you spineless slug!! We won't count your insolence. Play again.`;
     
-    // console.log(playRound(computerSelection, playerSelection));
+//     // console.log(playRound(computerSelection, playerSelection));
  
-    count = parseInt(wins + losses + draws);   
+//     count = parseInt(wins + losses + draws);   
 
-    console.log("Wins: " + wins + " Losses: " + losses + " Draws: " + draws + " Games Played: " + count);
-}}
+//     console.log("Wins: " + wins + " Losses: " + losses + " Draws: " + draws + " Games Played: " + count);
+// }}
 
 
 // THIS LAST FUNCTION ENDS THE GAME WITH AN ALERT WITH A W/L/D SCORE AND MESSAGE.
 
-function gameOver()
+// function gameOver()
 
-{
-    if (wins > losses){
-        return "You win, SPANK ME DADDY!!";
-    } else if (wins < losses){
-        return "You lose, idiot!!";
-    } else {
-        return "It's a stalemate!";
-    }
-}
+// {
+//     if (wins > losses){
+//         return "You win, SPANK ME DADDY!!";
+//     } else if (wins < losses){
+//         return "You lose, idiot!!";
+//     } else {
+//         return "It's a stalemate!";
+//     }
+// }
 
 //game();
 
