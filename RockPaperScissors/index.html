@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>Rock Paper Scissors</title>
+        <link rel="stylesheet" href="style.css">
+    </head>
+    <body>
+
+<!--Header-->
+
+        <div id="header">
+            <ul class="headerUl">
+                <li><img class="ball, left" src="images/pokeball.png" alt="Pokeball"></li>
+                <li class="liTitle">
+                    <ul class="title">
+                        <li><img class="pokemon" src="images/pokemon.png"></li>
+                        <li><h2>Fire - Water - Grass</h2></li>
+                    </ul>
+                </li>
+                <li><img class="ball, right" src="images/pokeball.png" alt="Pokeball"></li>
+            </ul>
+        </div>
+
+<!--Main body and game-->
+
+        <div id="mainArea">
+            <ul class="mainUl">
+                <li class="side">
+                    <img class="trainers, ash" src="images/ash.png" alt="Ash">
+                </li>
+
+<!--                    Main Game Area HTML                     -->
+
+                <li class="gameArea">                    
+                    <ul class="gameAreaFlx">
+                        
+                        <li class="gameScore">
+                            <span id="wins">Wins: </span>
+                            <span id="losses">Losses: </span>
+                            <span id="draws">Draws: </span>
+                        </li>
+
+                        <li class="gameDisplay">
+                            <div id="choice" class="window"></div>
+                            <div id="textArea">
+                                <div id="displayedText"></div>
+                                <div id="buttonDiv"></div>
+                            </div>
+                            <div id="opponent" class="window"></div>
+                        </li>
+
+                        <li class="gameSelection">
+                            <img id="fire" class="selection" onmouseover="setChar()" onmouseout="fireBall()"  src="images/pokeball.png" alt="Pokeball">
+                            <img id="water" class="selection" onmouseover="setSqui()" onmouseout="waterBall()" src="images/pokeball.png" alt="Pokeball">
+                            <img id="grass" class="selection" onmouseover="setBulb()" onmouseout="grassBall()" src="images/pokeball.png" alt="Pokeball">
+                       </li>
+                   </ul>
+                </li>
+
+                <li class="side">
+                    <img class="trainers, gary" src="images/gary.png" alt="Gary">
+                </li>
+            </ul>
+        </div>
+        <script type="text/javascript" src="script.js"></script>
+    </body>
+</html>

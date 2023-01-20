@@ -1,0 +1,242 @@
+body {
+    display: flex;
+    flex-direction: column;
+    font-family: 'Times New Roman', Times, serif;
+    font-size: 18px;
+    margin: 0px;
+    margin-top: 0px;
+    justify-content: stretch;
+    align-items: stretch;
+    
+}
+
+/* Below is the font.ttf insertion and header text */
+
+@font-face {
+    font-family: pokefont;
+    src: url(font/Pokemon\ Hollow.ttf);
+}
+
+@font-face {
+    font-family: pokegame;
+    src: url(font/Pokemon\ Game.ttf);
+}
+  
+h2 {
+    font-family: pokeFont;
+    color: #ffcb05;
+    font-size: 4vh;   
+}
+
+/* Header CSS */
+
+#header {
+    background-color: #003a70;
+    color:  #ffcb05;
+    margin-top: 0px;
+    margin-bottom: 0px;
+    display: flex;
+    justify-content: stretch;
+    max-height: 33vh;
+
+    
+}
+
+.headerUl {
+    list-style: none;
+    display: flex;
+    border-color: #ffcb05;
+    border-width: 10px;
+    border-style: ridge;
+    padding: 20px;
+    margin: 0px;
+    text-align: center;
+    align-items: center;
+    flex: 1 1 100%;
+    
+}
+
+img.ball\, {
+    max-height: 26vh;
+}
+
+img.pokemon {
+    max-height: 15vh;
+}
+
+
+.headerUl > * {
+    padding: 0px;
+    margin: 0px;
+}
+
+.title {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    list-style: none;
+    padding: 0px;
+}
+
+.liTitle {
+    flex: 1 1 100%;
+    max-height: 27vh;
+}
+
+/* Game area and background CSS */
+
+#mainArea {
+    flex: 3 1 100%;
+}
+    
+.mainUl {
+    display: flex;
+    padding: 0px;
+    margin: 0px;
+    align-items: stretch;
+    list-style: none;
+    
+}
+
+.gameArea {
+
+    flex: 1 1 100%;
+    border-color:#3d7dca;
+    border-width: 8px;
+    border-style: ridge;
+    background-image: url(images/backgroundImg.jpg);
+    background-position: center;
+    background-size: cover;
+    
+    
+}
+
+img.trainers\, {
+    width: 20vw;
+    height: 65vh;
+    border-color: #ffcb05;
+    border-width: 10px;
+    border-style: ridge;
+    display: flex;
+    align-items: stretch;
+}
+
+.side {
+    display: flex;
+    align-items: stretch;
+}
+
+/* Game play area */
+
+.gameAreaFlx {
+    display: flex;
+    flex-direction: column;
+    margin: 0px;
+    padding: 0px;
+    list-style: none;
+}
+
+.gameScore {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    background-color: #262727;
+    height: 15vh;
+    font-family: pokeFont;
+    color: #ffcb05;
+    font-size: 3vh;
+    font-weight: bold;
+}
+
+.gameDisplay > *{
+    flex-basis: 100%;
+    height: 33vh;
+
+}
+
+.gameSelection {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    
+}
+
+img.selection {
+    height: 15vh;
+}
+
+/* Game display CSS */
+
+.gameDisplay {
+    display: flex;
+    margin: 3vh 2vw;
+    max-height: 28vh;
+    border-radius: 4px;
+    gap: 1.5vw;
+}
+
+.window {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+    max-height: 28vh;
+    max-width: 28vh;
+    border-radius: 4px;
+}
+
+#textArea {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    font-family: pokegame;
+    color: #262727;
+    font-size: 1.2vw;
+    text-align: center;
+    border-radius: 6px;
+    border-color: #6d6d6d;
+    border-style: ridge;
+    border-width: 8px;
+    max-height: 26.5vh;
+    background: rgba(240, 248, 255, 0.5);
+    
+}
+
+#displayedText {
+    margin: 1vw 2vw;
+    flex-basis: 100%;
+    display: flex;
+    align-items: center;
+}
+
+#buttonDiv {
+    display: flex;
+    justify-content: center;
+    align-items: center;   
+}
+
+.addButton {
+    background: #003a70;
+    font-family: pokefont;
+    color: #ffcb05;
+    font-size: 1.2vw;
+    font-weight: bolder;
+    margin: 1.5vw;
+    padding: 0.5vw 1.5vw;
+    border-radius: 6px;
+}
+
+addWindow {
+    background-color: #ffcb05;
+    opacity: 0.5;
+    border-radius: 6px;
+    border-color: #6d6d6d;
+    border-style: ridge;
+    border-width: 8px;
+}
+
+.choiceImg {
+    max-height: 25vh;
+}
